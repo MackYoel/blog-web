@@ -22,6 +22,42 @@ module.exports = {
    */
   css: ['~/assets/scss/app.scss'],
   /*
+  ** Modules
+  */
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
+  ],
+
+  axios: {
+    baseURL: process.env.AXIOS_BASE_URL || 'http://127.0.0.1:8000',
+    retry: {
+      retries: 2
+    }
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/auth/login/', method: 'post', propertyName: 'key' },
+          logout: { url: '/auth/logout/', method: 'post' },
+          user: { url: '/auth/user/', method: 'get', propertyName: false }
+        },
+        tokenType: 'Token'
+      }
+    },
+    cookie: {
+      options: {
+        expires: 30
+      }
+    }
+  },
+
+  router: {
+    middleware: ['auth']
+  },
+  /*
   /*
   ** Build configuration
   */
