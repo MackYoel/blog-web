@@ -51,6 +51,9 @@ module.exports = {
       options: {
         expires: 30
       }
+    },
+    redirect: {
+      home: '/new-post'
     }
   },
 
